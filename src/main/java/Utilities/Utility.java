@@ -7,11 +7,21 @@ import org.pojoClasses.Boards;
 
 import java.io.UnsupportedEncodingException;
 
-public class Utility {
-    public static StringEntity converter(Boards board) throws UnsupportedEncodingException, JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(board);
+public class Utility{
 
-        return new StringEntity(json);
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
+    public static StringEntity serialization(Boards board) throws UnsupportedEncodingException, JsonProcessingException {
+
+        String JSON = objectMapper.writeValueAsString(board);
+        return new StringEntity(JSON);
+
     }
+
+    public static Boards deserialization(String JSON) throws JsonProcessingException {
+
+        return objectMapper.readValue(JSON,Boards.class);
+
+    }
+
 }

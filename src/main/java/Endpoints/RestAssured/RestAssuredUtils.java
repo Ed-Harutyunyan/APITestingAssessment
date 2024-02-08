@@ -27,7 +27,8 @@ public class RestAssuredUtils {
                 .spec(generateURL(null))
                 .contentType(JSON)
                 .accept(JSON)
-                .body(boards)
+                .queryParam("name",boards.getName())
+                .queryParam("desc",boards.getDesc())
                 .post();
         return response;
 

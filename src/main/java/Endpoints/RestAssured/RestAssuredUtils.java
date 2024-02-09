@@ -1,6 +1,7 @@
 package Endpoints.RestAssured;
 
 import Endpoints.TrelloAPIUtil;
+import Utilities.Utility;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -22,7 +23,7 @@ public class RestAssuredUtils {
     public static Response createBoard(Boards boards) throws IOException {
 
         Response response = RestAssured.given()
-                .spec(generateURL(null))
+                .spec(Utility.generateURL(null))
                 .contentType(JSON)
                 .accept(JSON)
                 .queryParam("name",boards.getName())
@@ -80,19 +81,9 @@ public class RestAssuredUtils {
 
         return RestAssured.given()
                 .baseUri(TrelloAPIUtil.BASEURI)
-                .basePath(getBasePath(id))
+                .basePath(Utility.getBasePath(id))
                 .queryParam("key", TrelloAPIUtil.KEY)
                 .queryParam("token", TrelloAPIUtil.TOKEN);
-
-    }
-
-    //Helper method for generateURL() to see weather the ID is given or not and generate the base path
-    private static String getBasePath(String id) {
-
-        return Optional
-                .ofNullable(id)
-                .map(id1 -> TrelloAPIUtil.BOARDS_PATH + "/" + id1)
-                .orElse(TrelloAPIUtil.BOARDS_PATH);
 
     }
 

@@ -65,17 +65,9 @@ public class ApacheHTTPClientUtils {
     //Helper Methods
     private static String generateURL(String id){
 
-        return TrelloAPIUtil.BASEURI + getBasePath(id) +
+        return TrelloAPIUtil.BASEURI + Utility.getBasePath(id) +
                 "?key=" + TrelloAPIUtil.KEY + "&" +
                 "token=" + TrelloAPIUtil.TOKEN;
-    }
-
-    private static String getBasePath(String id) {
-
-        return Optional
-                .ofNullable(id)
-                .map(id1 -> TrelloAPIUtil.BOARDS_PATH + "/" + id1)
-                .orElse(TrelloAPIUtil.BOARDS_PATH);
     }
 
 }

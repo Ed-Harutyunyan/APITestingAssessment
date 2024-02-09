@@ -1,6 +1,7 @@
 package Utilities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.entity.StringEntity;
 import org.pojoClasses.Boards;
@@ -21,6 +22,12 @@ public class Utility{
     public static Boards deserialization(String JSON) throws JsonProcessingException {
 
         return objectMapper.readValue(JSON,Boards.class);
+
+    }
+
+    public static JsonNode stringToJsonMapper (String responseBody) throws JsonProcessingException {
+
+        return objectMapper.readTree(responseBody);
 
     }
 

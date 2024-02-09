@@ -12,8 +12,6 @@ import static io.restassured.http.ContentType.JSON;
 
 public class RestAssuredUtils {
 
-    private static String BOARDS_PATH = "/boards";
-
     /**
      * Creates a board with API calls.
      * Uses helper method <code>generateURL()</code>
@@ -93,8 +91,8 @@ public class RestAssuredUtils {
 
         return Optional
                 .ofNullable(id)
-                .map(id1 -> BOARDS_PATH + "/" + id1)
-                .orElse(BOARDS_PATH);
+                .map(id1 -> TrelloAPIUtil.BOARDS_PATH + "/" + id1)
+                .orElse(TrelloAPIUtil.BOARDS_PATH);
 
     }
 

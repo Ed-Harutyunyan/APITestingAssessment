@@ -1,5 +1,4 @@
 import Endpoints.RestAssured.RestAssuredUtils;
-import Utilities.Utility;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.pojoClasses.Boards;
@@ -7,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.IOException;
 
-public class BoardPostTest {
+public class BoardRestAssuredTests {
 
     Boards boards = new Boards();
     String id;

@@ -2,10 +2,12 @@ package Endpoints.ApacheHTTPClient;
 
 import Endpoints.TrelloAPIUtil;
 import Utilities.Utility;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.pojoClasses.Boards;
 
 import java.io.IOException;
@@ -60,6 +62,13 @@ public class ApacheHTTPClientUtils {
         CloseableHttpResponse response = httpclient.execute(httpDelete);
 
         return response;
+    }
+
+    public static JsonNode jsonResponseGenerator(CloseableHttpResponse httpResponse) throws IOException {
+
+        String responseBody = EntityUtils.toString(httpResponse.getEntity());
+
+        return Utility.stringToJsonMapper(responseBody);
     }
 
     //Helper Methods

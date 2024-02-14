@@ -56,4 +56,9 @@ public class Utility{
 
     }
 
+    public static void setUpData(Boards boards){
+        boards.setName("BoardToTest");
+        boards.setDesc("Some Description");
+    }
+
 }

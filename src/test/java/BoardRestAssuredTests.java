@@ -1,4 +1,5 @@
 import Endpoints.RestAssured.RestAssuredUtils;
+import Utilities.Utility;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.pojoClasses.Boards;
@@ -10,17 +11,13 @@ public class BoardRestAssuredTests {
 
     Boards boards = new Boards();
     String id;
-    private void setUpData(){
-        boards.setName("BoardToTest");
-        boards.setDesc("Some Description");
-    }
 
     @Test(priority = 1)
     public void testBoardPost() throws IOException {
 
-        setUpData();
+        Utility.setUpData(boards);
         Response response = RestAssuredUtils.createBoard(boards);
-        //Boards responseBoard = response.getBody().as(Boards.class);
+        Boards responseBoard = response.getBody().as(Boards.class);
 
 
         //Fetch the id of the newly created board
@@ -29,7 +26,8 @@ public class BoardRestAssuredTests {
         boards.setId(id);
 
         Assert.assertEquals(response.getStatusCode(),200);
-        Assert.assertNotNull(response.jsonPath().get("id"));
+        Assert.assertNotNull(responseBoard.getId());
+        Assert.assertEquals(responseBoard.getName(), boards.getName());
 
     }
     @Test(priority = 2, dependsOnMethods = "testBoardPost")
